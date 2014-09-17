@@ -1,0 +1,65 @@
+<html>
+    <head>
+        <!-- Maybe change this later for custom title / page -->
+        <title>Surreal Estate</title>
+        <meta charset = 'utf-8' />
+
+        <!-- Load CSS -->
+        <link rel = 'stylesheet' href = '{{ STATIC_URL}}colors.css' type = 'text/css'></link>
+        <link rel = 'stylesheet' href = '{{ STATIC_URL}}common.css' type = 'text/css'></link>
+        <link rel = 'stylesheet' href = '{{ STATIC_URL }}header.css' type = 'text/css'></link>
+        {% block css %}
+        {% endblock %}
+
+        <!-- Load JS -->
+        <script src = '{{ STATIC_URL }}common.js'></script>
+        <script src = '{{ STATIC_URL }}header.js'></script>
+        <script src="{{ STATIC_URL }}jquery.dajax.core.js" type='text/javascript'></script>
+        <script src="{{STATIC_URL }}dajaxice.core.js" type='text/javascript'></script>
+        {% block js %}
+        {% endblock %}
+    </head>
+    <body>
+        <!-- HEADER -->
+        <div id = 'header'>
+            <a href = '/'><div id = 'header-logo'>
+            </div></a><div id = 'header-search-bar'>
+                <div id = 'header-search-text' placeholder = 'Search neighborhood name here...'>
+                </div><div id = 'header-search-icon' class = 'icon'>c
+                </div>
+            </div><div id = 'header-icons'>
+                <a href = '/favorites/'><div id = 'header-favorites-icon' class = 'icon outline'>b
+                </div></a><div id = 'header-settings-icon' class = 'icon' onclick = 'visibility()'>e
+                </div>
+            </div>
+            <div id='login-box'>
+                <form method = 'post' action = '/login' class = 'login-form'>
+                  {% csrf_token %}
+                  <div class='login-username'>
+                    <input required type='text' id='id_username' name='username' placeholder='Username'/>
+                  </div>
+                  <div class='login-password'>
+                    <input required type='password' id='id_password' name='password' placeholder='Password'/>
+                  </div>
+                  <input type="submit" value="Login" id='submit'/>
+                </form>
+                <form method = 'post' action = '/register/try' id='register-form' class = 'login-form'>
+                  {% csrf_token %}
+                    <input type='hidden' id='r_username' name='username' placeholder='Username'/>
+                    <input type='hidden' id='r_password' name='password' placeholder='Password'/>
+                  <input type="button" value="Register" onclick='submitRegister();'/>
+                </form>
+            </div>
+        </div>
+
+        <!-- CONTENT -->
+        {% block content %}
+        {% endblock %}
+
+        <!-- NO FOOTER -->
+
+    </body>
+
+
+
+</html>

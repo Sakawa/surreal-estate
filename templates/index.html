@@ -1,0 +1,69 @@
+{% extends 'header.html' %}
+{% block css %}
+<link href='https://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.css' rel='stylesheet' />
+<link rel = 'stylesheet' href = '{{ STATIC_URL }}main.css' type = 'text/css'></link>
+{% endblock %}
+{% block js %}
+<script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.js'></script>
+
+<script src = '{{ STATIC_URL }}mapbox.js'></script>
+<script src = '{{ STATIC_URL }}main.js'></script>
+{% endblock %}
+{% block content %}
+<!-- POPULATE THIS WITH DYNAMIC LOCATION? -->
+<div id = 'map' class = 'map main-map'>
+<!--     <iframe width='100%' height='100%' frameBorder='0' src='http://a.tiles.mapbox.com/v3/surrealestate.i63b6322/attribution,zoompan,zoomwheel.html'></iframe>
+ -->
+</div>
+<link rel="shortcut icon" href="{{ STATIC_URL }}favicon.png">
+<div id = 'main-popular-neighborhoods' class = 'modal'>
+    <div id = 'main-popular-neighborhoods-title'>
+        Popular Neighborhoods in Your Area
+    </div>
+    <div id = 'main-selection-filters'>
+        <div class = 'main-selection-filter main-selected' onclick = 'selectTab(0)'>
+            overall
+        </div><div class = 'main-selection-filter' onclick = 'selectTab(1)'>
+            schools
+        </div><div class = 'main-selection-filter' onclick = 'selectTab(2)'>
+            price
+        </div><div class = 'main-selection-filter' onclick = 'selectTab(3)'>
+            nature
+        </div><div class = 'main-selection-filter' onclick = 'selectTab(4)'>
+            sports
+        </div>
+    </div>
+    <div id = 'main-neighborhoods'>
+    {% for neighborhood in neighborhoods %}
+        <div class = 'main-neighborhood'>
+            <div class = 'main-neighborhood-favorite-icon icon blue'>b
+            </div><div class = 'main-neighborhood-name'>
+            {{ neighborhood.name }}
+            </div>
+            <div class = 'main-neighborhood-image'>
+                <img src = '{{ STATIC_URL }}{{ neighborhood.thumbnail70 }}'></img>
+            </div>
+            <div class = 'main-neighborhood-rating blue icon main-selected'>
+                <span class = 'blue'>{{ neighborhood.overall_p }}</span><span class = 'light-blue'>{{ neighborhood.overall_n }}</span>
+            </div>
+            <div class = 'main-neighborhood-rating blue icon'>
+                <span class = 'blue'>{{ neighborhood.school_p }}</span><span class = 'light-blue'>{{ neighborhood.school_n }}</span>
+            </div>
+            <div class = 'main-neighborhood-rating blue icon'>
+                <span class = 'blue'>{{ neighborhood.price_p }}</span><span class = 'light-blue'>{{ neighborhood.price_n }}</span>
+            </div>
+            <div class = 'main-neighborhood-rating blue icon'>
+                <span class = 'blue'>{{ neighborhood.nature_p }}</span><span class = 'light-blue'>{{ neighborhood.nature_n }}</span>
+            </div>
+            <div class = 'main-neighborhood-rating blue icon'>
+                <span class = 'blue'>{{ neighborhood.recreation_p }}</span><span class = 'light-blue'>{{ neighborhood.recreation_n }}</span>
+            </div>
+
+            <a href = '/ratings/{{ neighborhood.url }}'><div class = 'main-neighborhood-explore-button button'>
+                explore
+            </div></a>
+        </div>
+    {% endfor %}
+    </div>
+</div>
+{% endblock %}

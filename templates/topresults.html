@@ -1,0 +1,54 @@
+{% extends 'header.html' %}
+{% block css %}
+    <link rel = 'stylesheet' href = '{{ STATIC_URL }}topresults.css' type = 'text/css'></link>
+{% endblock %}
+{% block js %}
+
+{% endblock %}
+{% block content %}
+<div id = 'content-wrapper'>
+	<div id = 'topresults-title' class = 'gray'>Your Top Results</div>
+	<div id = 'topresults-container'>
+		<div class = 'topresult'>
+			{% for result in neighborhoods %}
+			<div class = 'topresult-favorite-button'></div>
+			<div class = 'topresult-img'><img src = '{{ STATIC_URL }}{{ result.thumbnail320 }}'></img></div>
+			<div class = 'topresult-content'>
+				<div class = 'topresult-upper-half'>
+					<div class = 'topresult-neighborhood-name'>
+						<a href = '/ratings/{{ result.url }}'> {{result.name }}</a>
+					</div>
+					<div class = 'topresult-city-name'>
+						{{ result.parent }}
+					</div>
+					<div class = 'topresult-rating icon'>
+						<span class = 'blue'>
+						{{ result.overall_p }}</span><span class = 'light-blue'>{{ result.overall_n }}</span>
+					</div>
+				</div>
+				<div class = 'topresult-lower-half'>
+					<div class = 'topresult-schools icon'>
+						<span class = 'blue'>
+						{{ result.school_p }}</span><span class = 'light-blue'>{{ result.school_n }}</span>
+					</div>
+					<div class = 'topresult-nature blue icon'>
+						<span class = 'blue'>
+						{{ result.nature_p }}</span><span class = 'light-blue'>{{ result.nature_n }}</span>
+					</div>
+					<div class = 'topresult-sports blue icon'>
+						<span class = 'blue'>
+						{{ result.recreation_p }}</span><span class = 'light-blue'>{{ result.recreation_n }}</span>
+					</div>
+					<div class = 'topresult-shopping icon'>
+						<span class = 'blue'>
+						{{ result.shopping_p }}</span><span class = 'light-blue'>{{ result.shopping_n }}</span>
+					</div>
+				</div>
+			</div>
+		</div><div class = 'topresult'>
+		{%endfor%}
+		</div>
+	</div>
+</div>
+
+{% endblock %}

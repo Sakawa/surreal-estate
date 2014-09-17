@@ -1,0 +1,12 @@
+{% extends 'header.html' %}
+{% block css %}
+    <link rel = 'stylesheet' href = '{{ STATIC_URL }}404.css' type = 'text/css'></link>
+{% endblock %}
+{% block js %}
+{% endblock %}
+{% block content %}
+<div id = 'content-wrapper' class = 'bg-sky'>
+	<div id = 'error-icon'></div>
+	<div id = 'error-message gray'> Sorry, we currently do not have an information for your request. This is a new company, so we will try our best to gather information on your search shortly!</div>
+</div>
+{% endblock %}

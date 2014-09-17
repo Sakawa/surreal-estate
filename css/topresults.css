@@ -1,0 +1,136 @@
+#topresults-title {
+	font-size: 34px;
+	font-weight: 300;
+	text-align: center;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	width: 100%;
+}
+
+.topresult {
+	height: 525px;
+	width: 405px;
+	position: relative;
+	display: inline-block;
+	border: 1px solid #A6CDEF;
+	border-radius: 10px;
+	vertical-align: top;
+	margin: 5px 15px 15px 15px;
+}
+
+.topresult:last-child {
+	display: none;
+}
+
+.topresult:hover {
+    box-shadow: 0px 0px 15px 5px #A6CDEF;
+}
+
+.topresult.topresult-selected {
+	border: 2px solid #409AD2;
+	margin-left: 14px;
+	margin-right: 14px;
+	margin-top: 4px;
+	margin-bottom: 14px;
+}
+
+.topresult-img {
+	height: 320px;
+	width: 365px;
+	position: relative;
+	margin: 20px 20px 20px 20px;
+}
+
+.topresult-icon {
+	position: absolute;
+	right: 30px;
+	top: 0px;
+}
+
+.topresult-upper-half {
+	position: relative;
+	left: 20px;
+	height: 75px;
+}
+
+
+.topresult-city-name {
+	font-size: 30px;
+	font-weight: 300;
+}
+
+.topresult-neighborhood-name {
+	font-size: 32px;
+	font-weight: 300;
+}
+
+.topresult-neighborhood-name > a {
+	text-decoration: underline;
+	color: #409AD2;
+	/*TODO: FIGURE OUT THIS UGLY LINE*/
+	/*border-bottom: 1px solid #409AD2;*/
+}
+
+.topresult-neighborhood-name > a:hover {
+	color: black;
+	/*TODO: PICK A DIFFERENT COLOR*/
+}
+
+.topresult-rating {
+	position: absolute;
+	top: -webkit-calc((75px - 27px) / 2 );
+	right: 40px;
+	font-size: 25px;
+}
+
+.topresult-lower-half {
+	position: relative;
+	left: 20px;
+}
+
+.topresult-lower-half > div {
+	font-size: 25px;
+}
+
+.topresult-schools {
+	position: absolute;
+	top: 3px;
+}
+
+.topresult-nature {
+	position: absolute;
+	top: 33px;
+}
+
+.topresult-sports {
+	position: absolute;
+	right: 40px;
+	top: 3px;
+}
+
+.topresult-shopping {
+	position: absolute;
+	right: 40px;
+	top: 33px;
+}
+
+#topresult-container {
+	height: -webkit-calc(100% - 81px);
+	margin-left: -webkit-calc((100% - (405px * 3) - (15px * 5) - 6px - 10px) / 2);
+	overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+	width: 10px;
+	height: 18px;
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: #4B494A;
+	width: 10px;
+	-webkit-border-radius: 7px;
+}
+
+::-webkit-scrollbar-corner {
+    background-color: transparent;
+}

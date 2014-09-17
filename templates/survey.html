@@ -1,0 +1,173 @@
+<html>
+    <head>
+    	<link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700' rel='stylesheet' type='text/css'>
+        <link rel = 'stylesheet' href = '{{ STATIC_URL }}common.css' type = 'text/css'></link>
+        <link rel = 'stylesheet' href = '{{ STATIC_URL }}colors.css' type = 'text/css'></link>
+        <link rel = 'stylesheet' href = '{{ STATIC_URL }}survey.css' type = 'text/css'></link>
+    </head>
+    <body>
+    	<div id='titleImage'>
+    	<div id='start'>
+	    	<div id='logo'></div>
+	    	<a class="button" id="btnStart" data-scroll href='#surveyContent'>start</a>
+    	</div>
+    	</div>
+    	<form action='survey/submit' method='POST' name='survey' id='survey'>
+    		<input name='house' type='hidden'></input>
+    		<input name='apartment' type='hidden'></input>
+    		<input name='coop' type='hidden'></input>
+    		<input name='min_price' type='hidden'></input>
+    		<input name='max_price' type='hidden'></input>
+    		<input name='city' type='hidden'></input>
+    		<input name='country' type='hidden'></input>
+    		<input name='suburb' type='hidden'></input>
+    		<input name='few_shopping' type='hidden'></input>
+    		<input name='some_shopping' type='hidden'></input>
+    		<input name='many_shopping' type='hidden'></input>
+    		<input name='few_rec' type='hidden'></input>
+    		<input name='some_rec' type='hidden'></input>
+    		<input name='many_rec' type='hidden'></input>
+    	</form>
+    	<div id = 'surveyContent'>
+    	<h1>Please answer a few questions to get started</h1>
+    		<div class="surveyPart">
+    		<h3 class = "question">What temperature (&#176;F) range would you like to live in?</h3>
+    		<form id="temperature">
+<!-- 	    		<div class = 'questionAnswer'><input type='text' placeholder = 'avg. min' name='minTemp'></input>
+	    		 to <input type='text' placeholder = 'avg. max' name='maxTemp'></input></div> -->
+	    	</form>
+	    	</div>
+    		<div class="surveyPart">
+    		<h3 class = "question">How much are you willing to spend? (Thousands of $)</h3>
+    		<form id="price"><!--
+    			$<input type='text' placeholder = 'min' name='moneyMin'></input> to
+>>>>>>> f1d927730089603b7516094e5dc048ace6f6adfd
+    			<input type='text' placeholder = 'max' name='moneyMax'></input> -->
+    		</form>
+    		</div>
+    		<div class="surveyPart">
+    		<h3 class = "question">What type of residency would you like to live in?</h3>
+    		<form id="residency">
+					<div type="button" class="btn" value="House" id="btnHouse">House</br><img src='{{ STATIC_URL }}house.png' width="75"></img></div>
+					<div type="button" class="btn" value="Apt or Condo" id="btnApt">Apt or Condo</br><img src='{{ STATIC_URL }}apt.png' width="75"></img></div>
+				  	<div type="button" class="btn" value="Housing Co-op" id="btnCoop">Housing Co-op</br><img src='{{ STATIC_URL }}coop.png' width="75"></img></div>
+    		</form>
+    		</div>
+    		<div class="surveyPart">
+			<h3 class ='question'>What type of location would you like to live in?</h3>
+			<form id="location">
+					<div type="button" class="btn" value="Country" id="btnCountry">Country</br><img src='{{ STATIC_URL }}country.png' width="75"></img></div>
+					<div type="button" class="btn" value="Suburb" id="btnSuburb">Suburbs</br><img src='{{ STATIC_URL }}suburbs.png' width="75"></img></div>
+				  	<div type="button" class="btn" value="City" id="btnCity">City</br><img src='{{ STATIC_URL }}city.png' width="75"></img></div>
+    		</form>
+    		</div>
+	    	<div class="surveyPart">
+	    	<h3 class = "question">How many commercial centers do you want to live around?</h3>
+	    	<form id="commercial">
+	    			<div type="button" class="btn" value="Few" id="btnComFew">Few</br><img src='{{ STATIC_URL }}few-com.png' width="75"></img></div>
+					<div type="button" class="btn" value="Some" id="btnComSome">Some</br><img src='{{ STATIC_URL }}some-com.png' width="75"></img></div>
+					<div type="button" class="btn" value="Many" id="btnComMany">Many</br><img src='{{ STATIC_URL }}many-com.png' width="75"></img></div>
+	    	</form>
+	    	</div>
+	    	<div class="surveyPart">
+	    	<h3 class = "question">How many recreational centers do you want to live around?</h3>
+	    	<form id="recreational">
+	    			<div type="button" class="btn" value="Few" id="btnRecFew">Few</br><img src='{{ STATIC_URL }}few-rec.png' width="75"></img></div>
+					<div type="button" class="btn" value="Some" id="btnRecSome">Some</br><img src='{{ STATIC_URL }}some-rec.png' width="75"></img></div>
+					<div type="button" class="btn" value="Many" id="btnRecMany">Many</br><img src='{{ STATIC_URL }}many-rec.png' width="75"></img></div>
+	    	</form>
+        	</div>
+        </div>
+        	<div id='navigation'>
+        		<div id="nav">
+        		<div id="meter">
+        			<div id="meterBack"></div>
+        			<div id="meterFore"></div>
+        		</div>
+        		<div id="questionsAnswered">0/6</div>
+        		<div class = "button sm right" id="btnSubmit">submit</div>
+        		<a class = "button sm right white" href="">skip</a>
+        		</div>
+        	</div>
+    </body>
+    <script src='{{ STATIC_URL }}smooth-scroll.js'></script>
+    <script src='{{ STATIC_URL }}slider.js'></script>
+    <script>
+    window.onload = function() {
+    	smoothScroll.init();
+    	var questionsAnswered = 0;
+    	var s = new Slider(0, 100, 0, 100, 'Temperature', 600, 100, 100, document.getElementById('temperature'));
+    	var s_ = new Slider(0, 2000, 0, 2000, 'Price', 600, 100, 100, document.getElementById('price'));
+    	updateMeter = function () {
+			questionsAnswered = 0;
+			if (document.getElementById("residency").getElementsByClassName("toggle").length > 0) {
+				questionsAnswered += 1;
+			}
+			if (window.pageYOffset > 1000 || s.getMinValue() > 0 || s.getMaxValue() < 100) {
+	    		questionsAnswered += 1;
+    		}
+    		if (window.pageYOffset > 1100 || s_.getMinValue() > 0 || s_.getMaxValue() < 2000) {
+	    		questionsAnswered += 1;
+    		}
+			if (document.getElementById("location").getElementsByClassName("toggle").length > 0) {
+				questionsAnswered += 1;
+			}
+			if (document.getElementById("commercial").getElementsByClassName("toggle").length > 0) {
+				questionsAnswered += 1;
+			}
+			if (document.getElementById("recreational").getElementsByClassName("toggle").length > 0) {
+				questionsAnswered += 1;
+			}
+			document.getElementById('questionsAnswered').innerHTML = questionsAnswered + '/6';
+			var width = 60*questionsAnswered;
+			meterFore.style.width = width + 'px';
+    	}
+    	window.onscroll = function () {
+    		if (window.pageYOffset > 500) {
+	    		var nav = document.getElementById('navigation');
+	    		nav.style.visibility = 'visible';
+    		}
+    		else {
+    			var nav = document.getElementById('navigation');
+	    		nav.style.visibility = 'hidden';
+    		}
+    		updateMeter();
+    	}
+	    var submit = document.getElementById('btnSubmit');
+	    submit.addEventListener("click", function() {
+    		var toggled = document.getElementsByClassName('toggle');
+    		var List = [];
+    		var priceLow = s_.getMinValue();
+    		var priceHigh = s_.getMaxValue();
+    		var tempLow = s.getMinValue();
+    		var tempHigh = s.getMaxValue();
+    		for (var i=0; i < toggled.length; i++) {
+    			console.log(toggled[i].id);
+    			List.push(toggled[i].id)
+    		}
+    		console.log(List);
+    	});
+        var buttons = document.getElementsByClassName('btn');
+        for (var i = 0; i < buttons.length; i++) {
+		    // buttons[index].setAttribute('class', 'cf');
+		    buttons[i].addEventListener("click", function() {
+				var classList = this.className.split(/\s+/);
+				var active = -1;
+				for (var j = 0; j < classList.length; j++) {
+				   	if (classList[j] === 'toggle') {
+				   		active = j;
+				 		break;
+				  	}
+				}
+				if (active < 0) {
+					this.className = 'btn toggle';
+				}
+				else {
+					this.className = 'btn';
+				}
+				updateMeter();
+		    });
+		}
+	};
+    </script>
+</html>

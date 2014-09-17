@@ -1,0 +1,106 @@
+@charset "UTF-8";
+
+@font-face {
+  font-family: "untitled-font-1";
+  src:url("fonts/untitled-font-1.eot");
+  src:url("fonts/untitled-font-1.eot?#iefix") format("embedded-opentype"),
+    url("fonts/untitled-font-1.woff") format("woff"),
+    url("fonts/untitled-font-1.ttf") format("truetype"),
+    url("fonts/untitled-font-1.svg#untitled-font-1") format("svg");
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+[data-icon]:before {
+  font-family: "untitled-font-1" !important;
+  content: attr(data-icon);
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+  font-family: "untitled-font-1" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-fontawesome-webfont:before {
+  content: "a";
+}
+.icon-fontawesome-webfont-1:before {
+  content: "b";
+}
+.icon-fontawesome-webfont-2:before {
+  content: "c";
+}
+.icon-fontawesome-webfont-3:before {
+  content: "d";
+}
+.icon-fontawesome-webfont-4:before {
+  content: "e";
+}
+.icon-fontawesome-webfont-6:before {
+  content: "f";
+}
+.icon-megaphone:before {
+  content: "g";
+}
+.icon-trees:before {
+  content: "h";
+}
+.icon-fontawesome-webfont-5:before {
+  content: "i";
+}
+.icon-fontawesome-webfont-7:before {
+  content: "j";
+}
+.icon-graduation-cap:before {
+  content: "k";
+}
+.icon-thermometer:before {
+  content: "l";
+}
+.icon-fontawesome-webfont-8:before {
+  content: "m";
+}
+.icon-marker:before {
+  content: "n";
+}
+.icon-fontawesome-webfont-9:before {
+  content: "o";
+}
+.icon-fontawesome-webfont-10:before {
+  content: "p";
+}
+.icon-light-up:before {
+  content: "q";
+}
+.icon-up-open-big:before {
+  content: "r";
+}
+.icon-up-open:before {
+  content: "s";
+}
+.icon-up-open-mini:before {
+  content: "t";
+}
+.icon-dribbble-1:before {
+  content: "u";
+}
+.icon-fontawesome-webfont-11:before {
+  content: "v";
+}

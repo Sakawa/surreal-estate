@@ -1,0 +1,10 @@
+            <div class = 'ratings-review'>
+                <div class = 'ratings-reviewer'>
+                    <div class = 'ratings-reviewer-name gray-two'>{{ review.author }}</div>
+                    <div class = 'ratings-reviewer-occupation gray-two'>{{ review.jobs }}</div>
+                </div>
+                <div class = 'ratings-review-text gray-three'>
+                    {{ review.body }}
+                </div>
+                <div class = 'ratings-review-send icon light-blue' onclick = 'sendMessagePopup("{{ review.author }}")'>v</div>
+            </div>

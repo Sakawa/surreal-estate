@@ -1,0 +1,147 @@
+{% extends 'header.html' %}
+{% block css %}
+    <link rel = 'stylesheet' href = '{{ STATIC_URL }}ratings.css' type = 'text/css'></link>
+{% endblock %}
+{% block js %}
+<script src= '{{ STATIC_URL }}ratings.js'></script>
+{% endblock %}
+{% block content %}
+<div id = 'content-wrapper' class = 'bg-sky'>
+    <div id = 'ratings-info-container'>
+        <div id = 'ratings-info-favorite' onclick = 'ajaxToggle()'></div>
+        <div id = 'ratings-info-neighborhood-name' class = 'gray'>{{ name }}</div>
+        <div class = 'ratings-info-block'>
+            <div id = 'ratings-star' class = 'blue icon'>j</div>
+            <div id = 'ratings-ratings-title' class = 'light-gray'>RATINGS
+            </div>
+
+            <div id = 'ratings-rating' class = 'blue icon'>
+                <span class = 'blue'>
+                {{ overall_p }}</span><span class = 'light-blue'>{{ overall_n }}</span>
+                <div class = 'ratings-tooltip'>Overall</div>
+            </div>
+            <div id = 'ratings-sports' class = 'blue icon'>
+                <span class = 'blue'>
+                {{ recreation_p }}</span><span class = 'light-blue'>{{ recreation_n }}</span>
+                <div class = 'ratings-tooltip'>Sports</div>
+            </div>
+            <div id = 'ratings-schools' class = 'blue icon'>
+                <span class = 'blue'>
+                {{ school_p }}</span><span class = 'light-blue'>{{ school_n }}</span>
+                <div class = 'ratings-tooltip'>Schools</div>
+            </div>
+            <div id = 'ratings-nature' class = 'blue icon'>
+                <span class = 'blue'>
+                {{ nature_p }}</span><span class = 'light-blue'>{{ nature_n }}</span>
+                <div class = 'ratings-tooltip'>Nature</div>
+            </div>
+            <div id = 'ratings-shopping' class = 'blue icon'>
+                <span class = 'blue'>
+                {{ shopping_p }}</span><span class = 'light-blue'>{{ shopping_n }}</span>
+                <div class = 'ratings-tooltip'>Shopping</div>
+            </div>
+        </div>
+        <div class = 'ratings-info-block'>
+            <div id = 'ratings-population-icon' class = 'blue icon'>e</div>
+
+            <div id = 'ratings-population-title' class = 'light-gray'>POPULATION
+            </div>
+
+            <div id = 'ratings-population-count' class = 'gray'>
+                {% load humanize %}
+                {{ population|intcomma }}
+            </div>
+        </div>
+        <div class = 'ratings-info-block'>
+            <div id = 'ratings-temperature-icon' class = 'blue icon'>l</div>
+
+            <div id = 'ratings-temperature-title' class = 'light-gray'>AVG TEMPERATURE
+            </div>
+
+            <div id = 'ratings-temperature-high' class = 'gray'>
+                High: {{avg_high}}&#176;F
+            </div>
+            <div id = 'ratings-temperature-low' class = 'gray'>
+                Low: {{avg_low}}&#176;F
+            </div>
+        </div>
+        <div class = 'ratings-info-block'>
+            <div id = 'ratings-rainfall-icon' class = 'blue icon'>x</div>
+
+            <div id = 'ratings-rainfall-title' class = 'light-gray'>ANNUAL RAINFALL
+            </div>
+
+            <div id = 'ratings-rainfall-amount' class = 'gray'>
+                {{ rainfall }} in.
+            </div>
+        </div>
+        <div id = 'ratings-map'>
+            <iframe width = '100%' height = '100%' frameBorder = 0 src = '{{ maplink }}'></iframe>
+        </div>
+
+
+    </div><div id = 'ratings-review-container'>
+        <div id = 'ratings-reviews-title' class = 'gray'>Reviews</div>
+        <div id = 'ratings-filter-review' class = 'button gray' onclick = 'filter()'>Filter</div>
+        <div id = 'ratings-reviews-list'>
+            {% for review in reviews %}
+            <div class = 'ratings-review'>
+                <div class = 'ratings-reviewer'>
+                    <div class = 'ratings-reviewer-name gray-two'>{{ review.author }}</div>
+                    <div class = 'ratings-reviewer-occupation gray-two'>{{ review.jobs }}</div>
+                </div>
+                <div class = 'ratings-review-text gray-three'>
+                    {{ review.body }}
+                </div>
+                <div class = 'ratings-review-send icon light-blue' onclick = 'sendMessagePopup("{{ review.author }}")'>v</div>
+            </div>
+            {% endfor %}
+        </div>
+    </div><div id = 'ratings-image-container'>
+        {% for picture in pictures %}
+        <div class = 'ratings-image'><img src='{{ STATIC_URL }}{{picture}}'/></div>
+        {% endfor %}
+    </div>
+</div>
+<div id = 'ratings-dim'></div>
+<!-- PERSON HERE -->
+<div id = 'ratings-modal-message'>
+    <div id = 'ratings-modal-title' class = 'blue'>Send a Message</div>
+    <div id = 'ratings-modal-to'>To: <div id = 'ratings-modal-recipient'></div></div>
+    <div id = 'ratings-modal-content'><textarea></textarea></div>
+    <!-- Change to onclick function -->
+    <div class="button" onclick = 'sendMessage("")' id='ratings-modal-cancel-button'>Cancel</div>
+    <div class="button-blue" id = 'ratings-modal-send-button' onclick = 'sendMessage("")'>Send</div>
+</div>
+
+<div id = 'ratings-filter-modal'>
+    <div id = 'filter-modal-title' class = 'blue'>Filter</div>
+    <div class="button" onclick = 'cancelMessage("")' id='filter-modal-cancel-button'>Cancel</div>
+    <div id = 'filter-modal-content'>
+    <form action="">
+        <div id = 'filter-modal-content'>
+            <span class="filter-modal-title">Occupation</span>
+            <input type="checkbox" name="Jobs" value="Homemaker">Homemaker
+            <input type="checkbox" name="Jobs" value="Student">Student 
+            <input type="checkbox" name="Jobs" value="Science">Science <br>
+            <input type="checkbox" name="Jobs" value="Liberal Arts">Liberal Arts 
+            <input type="checkbox" name="Jobs" value="Services">Services
+            <input type="checkbox" name="Jobs" value="BusinessOwner">Business Owner
+            <span class="filter-modal-title">Children</span>
+            <input type="radio" name="Kids" value="Yes">Yes
+            <input type="radio" name="Kids" value="No">No
+            <span class="filter-modal-title">Age</span>
+            <div id="filter-age">
+            </div>
+        </div>
+</form>
+    </div>
+    <div class="button-blue" id = 'filter-modal-filter-button' onclick = 'filterReview("")'>Filter</div>
+</div>
+<script src='{{ STATIC_URL }}slider.js'></script>
+<!-- <div id = 'ratings-filter-modal'>
+    Jobs: Homemaker, Student, Science, Liberal Arts, Services, Business Owner
+    Kids: Yes or No
+    Age: Ranges of 25-40, 40-65, >= 65
+</div> -->
+{% endblock %}

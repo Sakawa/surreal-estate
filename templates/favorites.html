@@ -1,0 +1,65 @@
+{% extends 'header.html' %}
+{% block css %}
+    <link rel = 'stylesheet' href = '{{ STATIC_URL }}favorites.css' type = 'text/css'></link>
+{% endblock %}
+{% block js %}
+<script src = '{{ STATIC_URL }}favorites.js'></script>
+{% endblock %}
+{% block content %}
+<form action='/topresults/' method='POST' id='topchoices'>
+{% csrf_token %}
+<div id = 'content-wrapper'>
+	<div id = 'favorites-title' class = 'gray'>Favorites</div>
+	<input id='favorites-compare-selected-overlay' class = 'button gray' type='submit'></input>
+	<div id = 'favorites-compare-selected' class = 'button gray'>Compare Selected</div>
+	<div id = 'favorites-desc' class = 'gray'>Click the cards to select the neighborhoods you want to compare</div>
+	<form action='/topresults/' method='POST' id='topchoices'>
+	    {% csrf_token %}
+		<input id='favorites-compare-selected-overlay' class = 'button gray' type='submit' name='neighborhoods'></input>
+		<div id = 'favorites-compare-selected' class = 'button gray'>Compare Selected</div>
+	</form>
+	<div id = 'favorites-container'>
+		<div class = 'favorite' onclick = 'toggleSelect(this)'>
+			{% for favorite in favorites %}
+			<input type = 'hidden' name = 'neighborhoods' value = '{{ favorite.name }}' />
+			<div class = 'favorite-img'><img src = '{{ STATIC_URL }}{{ favorite.thumbnail320 }}'></img></div>
+			<div class = 'favorite-content'>
+				<div class = 'favorite-upper-half'>
+					<div class = 'favorite-neighborhood-name'>
+						<a href = '/ratings/{{ favorite.url }}'>{{ favorite.name }}</a>
+					</div>
+					<div class = 'favorite-city-name'>
+						{{ favorite.parent }}
+					</div>
+					<div class = 'favorite-rating icon'>
+						<span class = 'blue'>
+						{{ favorite.overall_p }}</span><span class = 'light-blue'>{{ favorite.overall_n }}</span>
+					</div>
+				</div>
+				<div class = 'favorite-lower-half'>
+					<div class = 'favorite-schools icon'>
+						<!-- No space allowed between the spans! -->
+						<span class = 'blue'>
+						{{ favorite.school_p }}</span><span class = 'light-blue'>{{ favorite.school_n }}</span>
+					</div>
+					<div class = 'favorite-nature blue icon'>
+						<span class = 'blue'>
+						{{ favorite.nature_p }}</span><span class = 'light-blue'>{{ favorite.nature_n }}</span>
+					</div>
+					<div class = 'favorite-sports blue icon'>
+						<span class = 'blue'>
+						{{ favorite.recreation_p }}</span><span class = 'light-blue'>{{ favorite.recreation_n }}</span>
+					</div>
+					<div class = 'favorite-shopping icon'>
+						<span class = 'blue'>
+						{{ favorite.shopping_p }}</span><span class = 'light-blue'>{{ favorite.shopping_n }}</span>
+					</div>
+				</div>
+			</div>
+		</div><div class = 'favorite' onclick = 'toggleSelect(this)'>
+		{%endfor%}
+		</div>
+	</div>
+</div>
+</form>
+{% endblock %}
